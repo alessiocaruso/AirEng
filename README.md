@@ -13,3 +13,9 @@ Questo progetto è un'applicazione per la prenotazione di voli che offre una ser
  - [x] Annulla prenotazione
  - [ ] Visualizzare prenotazioni
  - [x] Uscire dal programma
+ ## Developers
+ 
+ - Alessio Caruso
+ - Enrico Cecchini
+ - Francesca Ciafrei
+ - Simone Suardi
