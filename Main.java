@@ -146,7 +146,7 @@ public class Main {
                 case 4:
                     for (Voli volo : voli) {
                         System.out.println("Numero volo: " + volo.getNumVolo());
-
+                        volo.stampaPasseggeri();
                     }
                     break;
                 case 5:
