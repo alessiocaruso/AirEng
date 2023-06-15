@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class Voli {
@@ -12,11 +13,12 @@ public class Voli {
     private String orarioPartenza;
     private String orarioArrivo;
     private ArrayList<String> nomePasseggeri;
+    private double prezzoVolo;
     private int postiDisponibili;
 
     // Costruttore per creare gli oggetti Volo
     public Voli(String nomeCompagnia, int numVolo, int numPosti, String partenza, String destinazione,
-            String orarioPartenza, String orarioArrivo, ArrayList<String> nomePass) {
+            String orarioPartenza, String orarioArrivo, ArrayList<String> nomePass, double prezzoVolo) {
         this.nomeCompagnia = nomeCompagnia;
         this.numVolo = numVolo;
         this.numPosti = numPosti;
@@ -25,6 +27,7 @@ public class Voli {
         this.orarioArrivo = orarioArrivo;
         this.orarioPartenza = orarioPartenza;
         this.nomePasseggeri = nomePass;
+        this.prezzoVolo = prezzoVolo;
     }
 
     // Metodo per ottenere il nome della compagnia
@@ -67,6 +70,11 @@ public class Voli {
         return nomePasseggeri;
     }
 
+    // Metodo per ottenere prezzo volo
+    public double getPrezzoVolo() {
+        return prezzoVolo;
+    }
+
     // Metodo per stampare le informazioni dei voli
     public void stampaInfo() {
         System.out.println("Nome compagnia   : " + nomeCompagnia);
@@ -86,10 +94,12 @@ public class Voli {
         }
     }
 
+
     // Metodo per prenotare il volo
     public void prenotaVolo(String nome) {
         numPosti = numPosti - 1; // riduce il numero di posti
         System.out.println("Prenotazione effettuata con successo!");
+        System.out.println("Importo pagato: " + prezzoVolo + " euro");
         nomePasseggeri.add(nome); // aggiunge il nome del passeggero all'ArrayList contentente i nomi dei
                                   // passeggeri di quel volo
     }
