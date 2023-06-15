@@ -31,7 +31,7 @@ public class Main {
         Voli volo6 = new Voli("Air Dolomiti", 806, 200, "Parigi", "Milano", "9.50", "11.00", nomePasseggeri6, 30);
         voli.add(volo6);
         ArrayList<String> nomePasseggeri7 = new ArrayList<>();
-        Voli volo7 = new Voli("Ryanair", 958, 250, "Amsterdam", "Roma", "7.30", "4.30", nomePasseggeri7, 50);
+        Voli volo7 = new Voli("Ryanair", 958, 250, "Oslo", "Roma", "7.30", "4.30", nomePasseggeri7, 50);
         voli.add(volo7);
         ArrayList<String> nomePasseggeri8 = new ArrayList<>();
         Voli volo8 = new Voli("Vueling", 573, 300, "Bologna", "Napoli", "6.50", "7.20", nomePasseggeri8, 45);
@@ -86,6 +86,9 @@ public class Main {
             switch (scelta) {
                 case 1:
                     // Stampa informazioni di tutti i voli appartententi all'ArrayList voli
+System.out.println("----------------------------------------------------------------------------------------------------------------------");
+System.out.println("| Nome Compagnia  | Num. Volo | Num. Posti | Partenza | Destinazione | Orario Partenza | Orario Arrivo | Prezzo Volo |");
+System.out.println("----------------------------------------------------------------------------------------------------------------------");
                     for (Voli volo : voli) {
                         volo.stampaInfo();
                     }
@@ -121,7 +124,9 @@ public class Main {
                                         System.out.println("2. Annulla il pagamento");
                                         sceltaPagamento = scannerInt.nextInt();
                                         if (sceltaPagamento == 1) {
+                                        
                                             volo.prenotaVolo(datiPasseggero);
+                                            volo.stampaBiglietto();
                                             break;
                                         } else if (sceltaPagamento == 2) {
                                             System.out.println("Hai annullato il pagamento");
