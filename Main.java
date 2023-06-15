@@ -7,10 +7,13 @@ import java.text.DecimalFormat;
 
 public class Main {
     public static void main(String[] args) {
+        // Gli ArrayList nomePasseggeri memorizzano i nomi dei passeggeri per ogni volo
         ArrayList<String> nomePasseggeri1 = new ArrayList<>();
+        // L'ArrayList voli inserisce nell'array tutti gli oggetti volo
         ArrayList<Voli> voli = new ArrayList<>();
+        // Creazioni di un nuovo oggetto volo
         Voli volo1 = new Voli("Ryanair", 1312, 20, "Napoli", "Barcellona", "8.50", "11.50", nomePasseggeri1);
-        voli.add(volo1);
+        voli.add(volo1); // Aggiunta dell'oggetto volo nell'ArrayList voli che contiene tutti gli oggetti
         ArrayList<String> nomePasseggeri2 = new ArrayList<>();
         Voli volo2 = new Voli("Ryanair", 2314, 30, "Napoli", "Parigi", "11.50", "13.50", nomePasseggeri2);
         voli.add(volo2);
@@ -68,6 +71,7 @@ public class Main {
         System.out.println("Benvenuto!");
         int scelta = 0;
         do {
+            // Menu
             System.out.println("Menu:");
             System.out.println("1. Visualizza elenco voli");
             System.out.println("2. Prenota un volo");
@@ -76,36 +80,46 @@ public class Main {
             System.out.println("5. Esci");
             System.out.print("Seleziona un'opzione: ");
 
-            scelta = scannerInt.nextInt();
+            scelta = scannerInt.nextInt(); // scelta del menù
             switch (scelta) {
                 case 1:
+                    // Stampa informazioni di tutti i voli appartententi all'ArrayList voli
                     for (Voli volo : voli) {
                         volo.stampaInfo();
                     }
                     break;
                 case 2:
+                    // Prenotazione voli
                     boolean flagPrenotazioni = false;
                     System.out.println("Inserisci il numero del volo che vuoi prenotare");
-                    int sceltaVolo = scannerInt.nextInt();
+                    int sceltaVolo = scannerInt.nextInt(); // Scelta del numero di volo
                     for (Voli volo : voli) {
                         if (volo.getNumVolo() == sceltaVolo && volo.getNumPosti() > 0) {
+                            // Controllo esistenza numero volo e se quel volo ha disponibilità
                             System.out.println("Ci sono " + volo.getNumPosti() + " posti disponibili per questo volo!");
                             System.out.println("Inserisci il tuo nome e cognome");
-                            String datiPasseggero = scannerString.nextLine();
+                            String datiPasseggero = scannerString.nextLine(); // Inseriamo i dati del passeggero
                             int confermaPrenotazione = 0;
                             do {
+                                // Conferma prenotazione
                                 System.out.println("Vuoi confermare la tua prenotazione?");
                                 System.out.println("1. Conferma la prenotazione");
                                 System.out.println("2. Annulla la prenotazione");
                                 confermaPrenotazione = scannerInt.nextInt();
                                 if (confermaPrenotazione == 1) {
+                                    // Se l'utente conferma la prenotazione allora chiamiamo il metodo prenotaVolo
                                     volo.prenotaVolo(datiPasseggero);
-                                    volo.stampaPasseggeri();
+                                    // volo.stampaPasseggeri();
                                     break;
                                 } else if (confermaPrenotazione == 2) {
+                                    // Se l'utente non conferma la prenotazione ritorna al menù
+                                    System.out.println("Hai annullato la prenotazione!");
+
                                     break;
                                 } else if (confermaPrenotazione > 2) {
+                                    // Se l'utente preme un tasto sbagliato ritorna al menù
                                     System.out.println("Hai inserito un numero errato, riprova");
+                                    break;
                                 }
                             } while (confermaPrenotazione != 2);
 
@@ -116,26 +130,35 @@ public class Main {
                     System.out.println("Inserisci il numero del volo che vuoi disdire");
                     int sceltaVolo1 = scannerInt.nextInt();
                     for (Voli volo : voli) {
-                        if (volo.getNumVolo() == sceltaVolo1) {
+                        if (volo.getNumVolo() == sceltaVolo1) { // Controllo esistenza numero volo
                             System.out.println("Inserisci il tuo nome e cognome");
-                            String datiPasseggero = scannerString.nextLine();
+                            String datiPasseggero = scannerString.nextLine(); // Inseriamo i dati del passeggero
                             int annullaPrenotazione = 0;
                             do {
+                                // Conferma disdetta
                                 System.out.println("Vuoi confermare la tua disdetta?");
                                 System.out.println("1. Conferma la disdetta");
                                 System.out.println("2. Annulla la disdetta");
                                 annullaPrenotazione = scannerInt.nextInt();
                                 if (annullaPrenotazione == 1) {
-                                    for (int i = 0; i < volo.getNumPosti(); i++) {
-                                        if (volo.getNumVolo() == sceltaVolo1) {
-                                        }
-                                        volo.annullaPrenotazione(datiPasseggero);
+
+                                    for (int i = 0; i < volo.getNumPosti(); i++) { // Controlliamo per tutti i
+                                                                                   // passeggeri se esiste il passeggero
+                                                                                   // con il nome inserito da tastiera
+                                        // if (volo.getNumVolo() == sceltaVolo1) {}
+                                        volo.annullaPrenotazione(datiPasseggero); // Metodo per confrontare i dati del
+                                                                                  // passeggero e per aggiornare la
+                                                                                  // lista passeggeri e il numero di
+                                                                                  // passeggeri del volo
                                     }
 
                                     break;
                                 } else if (annullaPrenotazione == 2) {
+                                    // Se l'utente non conferma la disdetta ritorna al menù
+                                    System.out.println("Hai annullato la disdetta!");
                                     break;
                                 } else if (annullaPrenotazione > 2) {
+                                    // Se l'utente preme un tasto sbagliato ritorna al menù
                                     System.out.println("Hai inserito un numero errato, riprova");
                                 }
                             } while (annullaPrenotazione != 2);
@@ -144,9 +167,12 @@ public class Main {
                     }
                     break;
                 case 4:
+                    // Visualizza le prenotazioni per tutti i voli
                     for (Voli volo : voli) {
                         System.out.println("Numero volo: " + volo.getNumVolo());
                         volo.stampaPasseggeri();
+                        System.out.println("------------------------");
+
                     }
                     break;
                 case 5:
