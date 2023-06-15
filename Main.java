@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
@@ -77,7 +78,8 @@ public class Main {
             System.out.println("2. Prenota un volo");
             System.out.println("3. Annulla prenotazione");
             System.out.println("4. Visualizza le prenotazioni");
-            System.out.println("5. Esci");
+            System.out.println("5. Cercare un volo");
+            System.out.println("6. Esci");
             System.out.print("Seleziona un'opzione: ");
 
             scelta = scannerInt.nextInt(); // scelta del menù
@@ -175,13 +177,34 @@ public class Main {
 
                     }
                     break;
+
                 case 5:
+                    // Visualizza un volo specifico
+                    int count = 0;
+                    System.out.println("Inserisci luogo di partenza");
+                    String sceltaPartenza = scannerString.nextLine();
+                    System.out.println("Inserisci luogo di destinazione");
+                    String sceltaDestinazione = scannerString.nextLine();
+                    for (Voli volo : voli) {
+                        if (Objects.equals(volo.getPartenza(), sceltaPartenza)
+                                && Objects.equals(volo.getDestinazione(), sceltaDestinazione)) {
+                            count=count+1; //incrementiamo la count ogni volta che troviamo il volo
+                            volo.stampaInfo();
+                        }
+
+                    }
+                    if (count == 0) {   //se la count è zero vuol dire che non abbiamo trovato voli
+                        System.out.println("Non è stato trovato nessun volo");
+                        break;
+                    }
+                    break;
+                case 6:
                     System.out.println("Grazie e arrivederci");
                     return;
                 default:
                     System.out.println("Non hai inserito una scelta giusta");
                     break;
             }
-        } while (scelta != 5);
+        } while (scelta != 6);
     }
 }
