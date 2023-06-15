@@ -86,9 +86,12 @@ public class Main {
             switch (scelta) {
                 case 1:
                     // Stampa informazioni di tutti i voli appartententi all'ArrayList voli
-System.out.println("----------------------------------------------------------------------------------------------------------------------");
-System.out.println("| Nome Compagnia  | Num. Volo | Num. Posti | Partenza | Destinazione | Orario Partenza | Orario Arrivo | Prezzo Volo |");
-System.out.println("----------------------------------------------------------------------------------------------------------------------");
+                    System.out.println(
+                            "----------------------------------------------------------------------------------------------------------------------");
+                    System.out.println(
+                            "| Nome Compagnia  | Num. Volo | Num. Posti | Partenza | Destinazione | Orario Partenza | Orario Arrivo | Prezzo Volo |");
+                    System.out.println(
+                            "----------------------------------------------------------------------------------------------------------------------");
                     for (Voli volo : voli) {
                         volo.stampaInfo();
                     }
@@ -124,9 +127,21 @@ System.out.println("------------------------------------------------------------
                                         System.out.println("2. Annulla il pagamento");
                                         sceltaPagamento = scannerInt.nextInt();
                                         if (sceltaPagamento == 1) {
-                                        
+                                            int sceltaFinestrino = 0;
+
+                                            System.out.println("Vuoi il posto vicino al finestrino per 20 euro?");
+                                            System.out.println("1. Si");
+                                            System.out.println("2. No");
+                                            sceltaFinestrino = scannerInt.nextInt();
+                                            if (sceltaFinestrino == 1) {
+                                                volo.prezzoConFinestrino();
+                                            }
+
                                             volo.prenotaVolo(datiPasseggero);
                                             volo.stampaBiglietto();
+                                            if (sceltaFinestrino == 1) {
+                                                volo.fixaPrezzoFinestrino();
+                                            }
                                             break;
                                         } else if (sceltaPagamento == 2) {
                                             System.out.println("Hai annullato il pagamento");
