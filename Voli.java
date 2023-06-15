@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
-import java.text.DecimalFormat;
 
 public class Voli {
     // Proprietà dei Voli
@@ -14,7 +12,6 @@ public class Voli {
     private String orarioArrivo;
     private ArrayList<String> nomePasseggeri;
     private double prezzoVolo;
-    private int postiDisponibili;
 
     // Costruttore per creare gli oggetti Volo
     public Voli(String nomeCompagnia, int numVolo, int numPosti, String partenza, String destinazione,
@@ -76,38 +73,35 @@ public class Voli {
     }
 
     // Metodo per stampare le informazioni dei voli
+
+    //CASO 1
     public void stampaInfo() {
         // Stampa del tabellone orizzontale
-
         System.out.printf("| %-15s | %-9d | %-10d | %-8s | %-12s | %-15s | %-13s | %-11.2f |\n",
                 nomeCompagnia, numVolo, numPosti, partenza, destinazione,
                 orarioPartenza, orarioArrivo, prezzoVolo);
 
         System.out.println(
                 "----------------------------------------------------------------------------------------------------------------------");
-
     }
 
-    // Metodo per stampare le informazioni dei passeggeri
-    public void stampaPasseggeri() {
-        for (int i = 0; i < nomePasseggeri.size(); i++) {
-            System.out.println("Passeggero " + i + ": " + nomePasseggeri.get(i));
-        }
-    }
+  
 
+    //CASO 2
     // Metodo per prenotare il volo
-    public void prenotaVolo(String nome) {
+    public void prenotaVolo(String datiPasseggero) {
         numPosti = numPosti - 1; // riduce il numero di posti
         System.out.println("Prenotazione effettuata con successo!");
         System.out.println("Importo pagato: " + prezzoVolo + " euro");
-        nomePasseggeri.add(nome); // aggiunge il nome del passeggero all'ArrayList contentente i nomi dei
+        nomePasseggeri.add(datiPasseggero); // aggiunge il nome del passeggero all'ArrayList contentente i nomi dei
                                   // passeggeri di quel volo
     }
 
+    //Aggiunta costo del posto con finestrino
     public void prezzoConFinestrino() {
         prezzoVolo = prezzoVolo + 20;
     }
-
+    //Ritorno al valore originale del prezzo senza finestrino
     public void fixaPrezzoFinestrino() {
         prezzoVolo = prezzoVolo - 20;
     }
@@ -125,18 +119,31 @@ public class Voli {
         System.out.println("----------------------------------------------------");
     }
 
+    //CASO 3
     // Metodo per annullare la prenotazione
-    public void annullaPrenotazione(String nomeInput) {
-        for (int i = 0; i < nomePasseggeri.size(); i++) { // ciclo che scorre tutti i nomi dei passeggeri
-            if (Objects.equals(nomePasseggeri.get(i), nomeInput)) { // confronta se il nome inserito da tastiera
+    public int annullaPrenotazione(String nomeInput) {
+        for (int i = 0; i < nomePasseggeri.size(); i++) { // Ciclo che scorre tutti i nomi dei passeggeri
+            if (Objects.equals(nomePasseggeri.get(i), nomeInput)) { // Confronta se il nome inserito da tastiera
                                                                     // corrisponde ad uno dei passeggeri di quel volo
                 // se corrisponde, incrementiamo il numero di posti e rimuoviamo il passeggero
                 // dall'ArrayList
                 numPosti = numPosti + 1;
                 nomePasseggeri.remove(i);
-                System.out.println("Prenotazione cancellata con successo!");
-
+                int flag=1;
+                return flag;
             }
         }
+        return 1000;
     }
+
+    //CASO 4
+      // Metodo per stampare le informazioni dei passeggeri
+    public void stampaPasseggeri() {
+        for (int i = 0; i < nomePasseggeri.size(); i++) {
+            System.out.println("Passeggero " + i + ": " + nomePasseggeri.get(i));
+        }
+    }
+
+    //CASO 5
+    //Nessun metodo nella classe Voli
 }
