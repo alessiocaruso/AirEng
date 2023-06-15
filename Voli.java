@@ -77,14 +77,15 @@ public class Voli {
 
     // Metodo per stampare le informazioni dei voli
     public void stampaInfo() {
-        System.out.println("Nome compagnia   : " + nomeCompagnia);
-        System.out.println("Numero volo      : " + numVolo);
-        System.out.println("Numero posti     : " + numPosti);
-        System.out.println("Partenza da      : " + partenza);
-        System.out.println("Destinazione     : " + destinazione);
-        System.out.println("Orario partenza  : " + orarioPartenza);
-        System.out.println("Orario arrivo    : " + orarioArrivo);
-        System.out.println("------------------------");
+    // Stampa del tabellone orizzontale
+
+    System.out.printf("| %-15s | %-9d | %-10d | %-8s | %-12s | %-15s | %-13s | %-11.2f |\n",
+            nomeCompagnia, numVolo, numPosti, partenza, destinazione,
+            orarioPartenza, orarioArrivo, prezzoVolo  );
+
+System.out.println("----------------------------------------------------------------------------------------------------------------------");
+         
+
     }
 
     // Metodo per stampare le informazioni dei passeggeri
@@ -104,6 +105,18 @@ public class Voli {
                                   // passeggeri di quel volo
     }
 
+    public void stampaBiglietto(){
+// Stampa del biglietto aereo
+System.out.println("----------------------------------------------------");
+System.out.println("Nome compagnia: " + nomeCompagnia);
+System.out.println("Numero volo: " + numVolo);
+System.out.println("Partenza: " + partenza);
+System.out.println("Destinazione: " + destinazione);
+System.out.println("Orario partenza: " + orarioPartenza);
+System.out.println("Orario arrivo: " + orarioArrivo);
+System.out.println("Prezzo volo: " + prezzoVolo + " euro");
+System.out.println("----------------------------------------------------");
+    }
     // Metodo per annullare la prenotazione
     public void annullaPrenotazione(String nomeInput) {
         for (int i = 0; i < nomePasseggeri.size(); i++) { // ciclo che scorre tutti i nomi dei passeggeri
