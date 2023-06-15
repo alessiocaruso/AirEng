@@ -12,6 +12,7 @@ Questo progetto è un'applicazione per la prenotazione di voli che offre una ser
  - [x] Prenotazione volo
  - [x] Annulla prenotazione
  - [x] Visualizzare prenotazioni
+ - [x] Visualizzare voli specifici
  - [x] Uscire dal programma
  ## Developers
  
