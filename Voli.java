@@ -3,6 +3,7 @@ import java.util.Objects;
 import java.text.DecimalFormat;
 
 public class Voli {
+    // Proprietà dei Voli
     private String nomeCompagnia;
     private int numVolo;
     private int numPosti;
@@ -13,6 +14,7 @@ public class Voli {
     private ArrayList<String> nomePasseggeri;
     private int postiDisponibili;
 
+    // Costruttore per creare gli oggetti Volo
     public Voli(String nomeCompagnia, int numVolo, int numPosti, String partenza, String destinazione,
             String orarioPartenza, String orarioArrivo, ArrayList<String> nomePass) {
         this.nomeCompagnia = nomeCompagnia;
@@ -25,38 +27,47 @@ public class Voli {
         this.nomePasseggeri = nomePass;
     }
 
+    // Metodo per ottenere il nome della compagnia
     public String getNomeCompagnia() {
         return nomeCompagnia;
     }
 
+    // Metodo per ottenere il numero del volo
     public int getNumVolo() {
         return numVolo;
     }
 
+    // Metodo per ottenere il numero dei posti
     public int getNumPosti() {
         return numPosti;
     }
 
+    // Metodo per ottenere il luogo di partenza
     public String getPartenza() {
         return partenza;
     }
 
+    // Metodo per ottenere il luogo di destinazione
     public String getDestinazione() {
         return destinazione;
     }
 
+    // Metodo per ottenere l'orario di partenza
     public String getOrarioPartenza() {
         return orarioPartenza;
     }
 
+    // Metodo per ottenere l'orario di arrivo
     public String getOrarioArrivo() {
         return orarioArrivo;
     }
 
+    // Metodo per ottenere il nome dei passeggeri
     public ArrayList getNomePasseggeri() {
         return nomePasseggeri;
     }
 
+    // Metodo per stampare le informazioni dei voli
     public void stampaInfo() {
         System.out.println("Nome compagnia   : " + nomeCompagnia);
         System.out.println("Numero volo      : " + numVolo);
@@ -68,21 +79,28 @@ public class Voli {
         System.out.println("------------------------");
     }
 
+    // Metodo per stampare le informazioni dei passeggeri
     public void stampaPasseggeri() {
         for (int i = 0; i < nomePasseggeri.size(); i++) {
             System.out.println("Passeggero " + i + ": " + nomePasseggeri.get(i));
         }
     }
 
+    // Metodo per prenotare il volo
     public void prenotaVolo(String nome) {
-        numPosti = numPosti - 1;
+        numPosti = numPosti - 1; // riduce il numero di posti
         System.out.println("Prenotazione effettuata con successo!");
-        nomePasseggeri.add(nome);
+        nomePasseggeri.add(nome); // aggiunge il nome del passeggero all'ArrayList contentente i nomi dei
+                                  // passeggeri di quel volo
     }
 
+    // Metodo per annullare la prenotazione
     public void annullaPrenotazione(String nomeInput) {
-        for (int i = 0; i < nomePasseggeri.size(); i++) {
-            if (Objects.equals(nomePasseggeri.get(i), nomeInput)) {
+        for (int i = 0; i < nomePasseggeri.size(); i++) { // ciclo che scorre tutti i nomi dei passeggeri
+            if (Objects.equals(nomePasseggeri.get(i), nomeInput)) { // confronta se il nome inserito da tastiera
+                                                                    // corrisponde ad uno dei passeggeri di quel volo
+                // se corrisponde, incrementiamo il numero di posti e rimuoviamo il passeggero
+                // dall'ArrayList
                 numPosti = numPosti + 1;
                 nomePasseggeri.remove(i);
                 System.out.println("Prenotazione cancellata con successo!");
