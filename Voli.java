@@ -90,7 +90,7 @@ public class Voli {
     //CASO 2
     // Metodo per prenotare il volo
     public void prenotaVolo(String datiPasseggero) {
-        numPosti = numPosti - 1; // riduce il numero di posti
+        numPosti = numPosti - 1; // Riduce il numero di posti
         System.out.println("Prenotazione effettuata con successo!");
         System.out.println("Importo pagato: " + prezzoVolo + " euro");
         nomePasseggeri.add(datiPasseggero); // aggiunge il nome del passeggero all'ArrayList contentente i nomi dei
