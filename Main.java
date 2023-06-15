@@ -98,18 +98,19 @@ public class Main {
                     break;
                 case 2:
                     // Prenotazione voli
-                    boolean flagPrenotazioni = false;
                     System.out.println("Inserisci il numero del volo che vuoi prenotare");
                     int sceltaVolo = scannerInt.nextInt(); // Scelta del numero di volo
                     for (Voli volo : voli) {
-                        if (volo.getNumVolo() == sceltaVolo && volo.getNumPosti() > 0) {
+                        if (volo.getNumVolo() == sceltaVolo && volo.getNumPosti() > 0) { // Se il volo inserito
+                                                                                         // dall'utente esiste e se il
+                                                                                         // volo ha Numero posti>0
                             // Controllo esistenza numero volo e se quel volo ha disponibilità
                             System.out.println("Ci sono " + volo.getNumPosti() + " posti disponibili per questo volo!");
                             System.out.println("Inserisci il tuo nome e cognome");
                             String datiPasseggero = scannerString.nextLine(); // Inseriamo i dati del passeggero
                             int confermaPrenotazione = 0;
                             do {
-                                // Conferma prenotazione
+                                // Conferma prenotazione per il do while
                                 System.out.println("Vuoi confermare la tua prenotazione?");
                                 System.out.println("1. Conferma la prenotazione");
                                 System.out.println("2. Annulla la prenotazione");
@@ -128,19 +129,19 @@ public class Main {
                                         sceltaPagamento = scannerInt.nextInt();
                                         if (sceltaPagamento == 1) {
                                             int sceltaFinestrino = 0;
-
+                                            // Controlliamo se l'utente vuole il posto con finestrino
                                             System.out.println("Vuoi il posto vicino al finestrino per 20 euro?");
                                             System.out.println("1. Si");
                                             System.out.println("2. No");
                                             sceltaFinestrino = scannerInt.nextInt();
                                             if (sceltaFinestrino == 1) {
-                                                volo.prezzoConFinestrino();
+                                                volo.prezzoConFinestrino(); // Aggiorniamo prezzo biglietto
                                             }
-
-                                            volo.prenotaVolo(datiPasseggero);
-                                            volo.stampaBiglietto();
+                                            volo.prenotaVolo(datiPasseggero); // metodo per prenotare il volo
+                                            volo.stampaBiglietto(); // metodo per stampare il biglietto
                                             if (sceltaFinestrino == 1) {
-                                                volo.fixaPrezzoFinestrino();
+                                                volo.fixaPrezzoFinestrino(); // Dopo la scelta del finestrino, fixiamo
+                                                                             // il prezzo per gli utenti di dopo
                                             }
                                             break;
                                         } else if (sceltaPagamento == 2) {
@@ -166,7 +167,10 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println("Inserisci il numero del volo che vuoi disdire");
+                    // Annullare prenotazione
+                    // N.B. flag serve per gestire il controllo dell'esistenza del passeggero
+                    int flag = 0;
+                    System.out.println("Inserisci il numero del volo che vuoi disdire"); // Scelta volo da disdire
                     int sceltaVolo1 = scannerInt.nextInt();
                     for (Voli volo : voli) {
                         if (volo.getNumVolo() == sceltaVolo1) { // Controllo esistenza numero volo
@@ -179,16 +183,19 @@ public class Main {
                                 System.out.println("1. Conferma la disdetta");
                                 System.out.println("2. Annulla la disdetta");
                                 annullaPrenotazione = scannerInt.nextInt();
-                                if (annullaPrenotazione == 1) {
-
+                                if (annullaPrenotazione == 1) { // Se l'utente vuole confermare la disdetta
                                     for (int i = 0; i < volo.getNumPosti(); i++) { // Controlliamo per tutti i
                                                                                    // passeggeri se esiste il passeggero
                                                                                    // con il nome inserito da tastiera
-                                        // if (volo.getNumVolo() == sceltaVolo1) {}
-                                        volo.annullaPrenotazione(datiPasseggero); // Metodo per confrontare i dati del
-                                                                                  // passeggero e per aggiornare la
-                                                                                  // lista passeggeri e il numero di
-                                                                                  // passeggeri del volo
+                                        flag = volo.annullaPrenotazione(datiPasseggero);
+                                        // Metodo per confrontare dati passeggero e aggiornare lista passeggeri e numero
+                                        // di posti aereo
+                                        // N.B. flag serve per gestire il controllo dell'esistenza del passeggero
+                                        if (flag == 1) {
+                                            System.out.println("Prenotazione cancellata con successo!");
+                                            break;
+                                        }
+
                                     }
 
                                     break;
@@ -204,6 +211,11 @@ public class Main {
                         }
 
                     }
+                    // Se la flag è diversa da 1 vuol dire che non è stato trovato il nome digitato
+                    // da tastiera
+                    if (flag != 1) {
+                        System.out.println("Utente non trovato, impossibile cancellare la prenotazione");
+                    }
                     break;
                 case 4:
                     // Visualizza le prenotazioni per tutti i voli
@@ -217,18 +229,21 @@ public class Main {
 
                 case 5:
                     // Visualizza un volo specifico
-                    int count = 0;
+                    int count = 0; // Serve per vedere se troviamo il volo scelto dall'utente
+                                   // (partenza,destinazione)
                     System.out.println("Inserisci luogo di partenza");
                     String sceltaPartenza = scannerString.nextLine();
                     System.out.println("Inserisci luogo di destinazione");
                     String sceltaDestinazione = scannerString.nextLine();
                     for (Voli volo : voli) {
-                        if (Objects.equals(volo.getPartenza(), sceltaPartenza)
-                                && Objects.equals(volo.getDestinazione(), sceltaDestinazione)) {
+                        if (Objects.equals(volo.getPartenza(), sceltaPartenza) // controlliamo se esiste un volo dal
+                                                                               // luogo di partenza scelto dall'utente
+                                && Objects.equals(volo.getDestinazione(), sceltaDestinazione)) { // e se esiste un volo
+                                                                                                 // con destinazione da
+                                                                                                 // quella partenza
                             count = count + 1; // incrementiamo la count ogni volta che troviamo il volo
                             volo.stampaInfo();
                         }
-
                     }
                     if (count == 0) { // se la count è zero vuol dire che non abbiamo trovato voli
                         System.out.println("Non è stato trovato nessun volo");
