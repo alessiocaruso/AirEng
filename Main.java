@@ -92,10 +92,11 @@ public class Main {
                             "| Nome Compagnia  | Num. Volo | Num. Posti | Partenza | Destinazione | Orario Partenza | Orario Arrivo | Prezzo Volo |");
                     System.out.println(
                             "----------------------------------------------------------------------------------------------------------------------");
-                    for (Voli volo : voli) {
-                        volo.stampaInfo();
+                    for (Voli volo : voli) { //Iteriamo su tutti gi oggetti Voli appartenenti all'ArrayList volo
+                        volo.stampaInfo(); //Stampiamo le info provenienti dagli oggetti Voli
                     }
                     break;
+
                 case 2:
                     // Prenotazione voli
                     System.out.println("Inserisci il numero del volo che vuoi prenotare");
@@ -219,6 +220,7 @@ public class Main {
                     break;
                 case 4:
                     // Visualizza le prenotazioni per tutti i voli
+                    //Stamperà numero del volo e i passeggeri appartenenti a quel volo
                     for (Voli volo : voli) {
                         System.out.println("Numero volo: " + volo.getNumVolo());
                         volo.stampaPasseggeri();
