@@ -11,6 +11,7 @@ public class Autenticazione {
         public void menuAutenticazione(ArrayList<Voli> voli) {
         int scelta;
         Scanner scanner = new Scanner(System.in);
+        //Menu iniziale
         System.out.println("Cosa vuoi fare?:");
         System.out.println("1. Registrazione");
         System.out.println("2. Login");
@@ -19,15 +20,15 @@ public class Autenticazione {
         System.out.print("Seleziona un'opzione: ");
         scelta = scanner.nextInt();
         switch (scelta) {
-            case 1:
+            case 1: //registrazione + login
                 registration();
                 System.out.println("LOGIN:");
                 verify();
                 break;
-            case 2:
+            case 2: //login
                 verify();
                 break;
-            case 3:
+            case 3: //loin Master
                 loginMaster(voli);
 
                 break;
@@ -54,27 +55,26 @@ public void menuMaster(ArrayList<Voli> voli) {
         scelta = scanner.nextInt();
         switch (scelta) {
 
-            case 1:
+            case 1: //aggiungi nuovo volo e ritorna al menu
                 aggiungiVolo(voli);
                 menuMaster(voli);
                 break;
 
-            case 2:
+            case 2: //rimuovi volo e ritorna al menu
                 rimuovoVolo(voli);
                 menuMaster(voli);
                 break;
 
-            case 3:
+            case 3: //elimina un user
                 deleteUser();
                 break;
-            case 4:
-
+            case 4: //modifica user
                 modifyUser();
                 break;
-            case 5:
+            case 5: //vedi lista user
                 readUser();
                 break;
-            case 6:
+            case 6: //torna al menu
                 menuAutenticazione(voli);
                 break;
             case 7:
@@ -143,9 +143,7 @@ public void menuMaster(ArrayList<Voli> voli) {
         boolean isValid = false;
         System.out.println("Inserisci PIN segreto");
         int pinVerify = scanner.nextInt();
-        // Vediamo se nello stesso indice di username e password avremmo le giuste
-        // credenziali
-
+        // Inserimento del PIN segreto per accedere e visualizzare il menu del master
         if (pinVerify == 1234) {
             System.out.println("Accesso consentito");
             menuMaster(voli);
@@ -187,6 +185,7 @@ public void menuMaster(ArrayList<Voli> voli) {
         double prezzoVolo = scannerDouble.nextDouble();
         Voli nuovoVolo = new Voli(nomeCompagnia, numVolo, numPosti, partenza, destinazione, orarioPartenza,
                 orarioArrivo, nomePasseggeri, prezzoVolo);
+                //Aggiunta del nuovo volo nella lista dei voli
         voli.add(nuovoVolo);
     }
 
@@ -221,8 +220,8 @@ public void menuMaster(ArrayList<Voli> voli) {
 
         for (int i = 0; i < username.size(); i++) {
             String currentUsername = username.get(i);
-
             if (currentUsername.equals(usernameVerify)) {
+                //Se troviamo l'user
                 username.remove(i);
                 password.remove(i);
                 System.out.println("Utente eliminato correttamente");
@@ -243,6 +242,7 @@ public void menuMaster(ArrayList<Voli> voli) {
             String currentPassword = password.get(i);
 
             if (currentUsername.equals(usernameVerify) && currentPassword.equals(passwordVerify)) {
+                //Se l'username e la password sono giuste si chiederà di inserire un nuovo username
                 System.out.println("ACCESSO CONSENTITO");
                 System.out.println("Inserisci il nuovo username");
                 String newUsername = scanner.nextLine();
@@ -262,8 +262,7 @@ public void menuMaster(ArrayList<Voli> voli) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Inserisci PIN segreto per la visualizzazione della lista di utenti registrati");
         int pinVerify = scanner.nextInt();
-        // Vediamo se nello stesso indice di username e password avremmo le giuste
-        // credenziali
+        //  Inserimento del PIN segreto
         if (pinVerify == 1234) {
             System.out.println("Accesso consentito");
 
