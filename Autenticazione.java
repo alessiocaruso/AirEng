@@ -214,33 +214,18 @@ public void menuMaster(ArrayList<Voli> voli) {
         }
 
     }
-
-    public void deleteUser() {
-        // Verifica per il login
+   public void deleteUser() {
         Scanner scanner = new Scanner(System.in);
-        Scanner scannerInt = new Scanner(System.in);
         System.out.println("Inserisci username che vuoi eliminare");
         String usernameVerify = scanner.nextLine();
-        System.out.println("Inserisci PIN segreto per l'accesso alla rimozione dell'utente");
-        int pinVerify = scannerInt.nextInt();
-        // Vediamo se nello stesso indice di username e password avremmo le giuste
-        // credenziali
+
         for (int i = 0; i < username.size(); i++) {
             String currentUsername = username.get(i);
-            String currentPassword = password.get(i);
 
-            if (currentUsername.equals(usernameVerify) && pinVerify == 1234) {
-                // Se le credenziali sono giuste l'utente potrà accedere e impostiamo la
-                // booleana a true
-                System.out.println("ACCESSO CONSENTITO");
-                // Salviamo il nome dell'User perchè ci servirà per il database
-                username.remove(currentUsername);
-                password.remove(currentPassword);
+            if (currentUsername.equals(usernameVerify)) {
+                username.remove(i);
+                password.remove(i);
                 System.out.println("Utente eliminato correttamente");
-                break;
-            } else if (!currentUsername.equals(usernameVerify) || pinVerify != 1234) {
-                System.out.println("ACCESSO NEGATO");
-
                 break;
             }
         }
@@ -252,29 +237,26 @@ public void menuMaster(ArrayList<Voli> voli) {
         String usernameVerify = scanner.nextLine();
         System.out.println("Inserisci la tua password");
         String passwordVerify = scanner.nextLine();
-        // Vediamo se nello stesso indice di username e password avremmo le giuste
-        // credenziali
+
         for (int i = 0; i < username.size(); i++) {
             String currentUsername = username.get(i);
             String currentPassword = password.get(i);
 
             if (currentUsername.equals(usernameVerify) && currentPassword.equals(passwordVerify)) {
-                // Se le credenziali sono giuste l'utente potrà accedere e impostiamo la
-                // booleana a true
                 System.out.println("ACCESSO CONSENTITO");
                 System.out.println("Inserisci il nuovo username");
                 String newUsername = scanner.nextLine();
                 username.set(i, newUsername);
-                currentUser = currentUsername;
-                System.out.println("Username aggiunto correttamente");
+                currentUser = newUsername;
+                System.out.println("Username modificato correttamente");
                 break;
             } else {
                 System.out.println("Accesso non consentito");
                 break;
             }
         }
-
     }
+
 
     public void readUser() {
         Scanner scanner = new Scanner(System.in);
