@@ -7,8 +7,9 @@ Questo progetto è un'applicazione per la prenotazione di voli che offre una ser
  - 3.  Annullare prenotazione: Questa funzione consente agli utenti di annullare una prenotazione esistente. Gli utenti dovranno fornire il numero del volo e il nome del passeggero associato alla prenotazione che desiderano cancellare. L'applicazione verificherà i dettagli e, se corretti, eliminerà la prenotazione dal sistema.
  - 4.  Visualizzare prenotazioni: Gli utenti possono utilizzare questa funzione per visualizzare un elenco delle prenotazioni attualmente effettuate. Le informazioni visualizzate possono includere il numero del volo, il nome del passeggero e altre informazioni pertinenti. Questo permette agli utenti di tenere traccia delle prenotazioni effettuate in modo facile e veloce.
  - 5.  Visualizzare volo specifico: Gli utenti possono ricercare un volo scegliendo un luogo di partenza ed un luogo di destinazione così da vedere se esiste un volo specifico.
- - 6.  Operazioni CRUD sugli utenti
- - 7.  Uscire dal programma: Questa funzione consente agli utenti di uscire dall'applicazione e terminare il suo utilizzo.
+ - 6.  Aggiunta di nuovi voli e rimozione di voli già esistenti
+ - 7.  Operazioni CRUD sugli utenti
+ - 8.  Uscire dal programma: Questa funzione consente agli utenti di uscire dall'applicazione e terminare il suo utilizzo.
  ## Tasks list
  - [x] Visualizzazione elenco
  - [x] Prenotazione volo
@@ -16,7 +17,7 @@ Questo progetto è un'applicazione per la prenotazione di voli che offre una ser
  - [x] Visualizzare prenotazioni
  - [x] Visualizzare voli specifici
  - [x] Operazioni CRUD sugli utenti
- - [ ] Possibilità di aggiungere nuovi voli
+ - [x] Possibilità di aggiungere e rimuovere voli
  - [x] Uscire dal programma
  ## Developers
  
