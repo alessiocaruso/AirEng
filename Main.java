@@ -68,8 +68,8 @@ public class Main {
         Scanner scannerString = new Scanner(System.in);
 
         System.out.println("Benvenuto!");
-        Autenticazione auth = new Autenticazione();
-        auth.menuAutenticazione(voli);
+        Autenticazione auth = new Autenticazione(); //Oggetto per l'autenticazione
+        auth.menuAutenticazione(voli);              //Stampa del menu per l'autenticazione
 
         int scelta = 0;
         do {
@@ -157,7 +157,6 @@ public class Main {
                                 } else if (confermaPrenotazione == 2) {
                                     // Se l'utente non conferma la prenotazione ritorna al menù
                                     System.out.println("Hai annullato la prenotazione!");
-
                                     break;
                                 } else if (confermaPrenotazione > 2) {
                                     // Se l'utente preme un tasto sbagliato ritorna al menù
@@ -254,7 +253,7 @@ public class Main {
                         break;
                     }
                     break;
-                    case 6:
+                case 6:
                     auth.menuAutenticazione(voli);
                     break;
                 case 7:
