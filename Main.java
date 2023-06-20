@@ -70,6 +70,8 @@ public class Main {
         Scanner scannerString = new Scanner(System.in);
 
         System.out.println("Benvenuto!");
+        Autenticazione auth = new Autenticazione();
+        auth.menuAutenticazione();
         int scelta = 0;
         do {
             // Menu
@@ -92,8 +94,8 @@ public class Main {
                             "| Nome Compagnia  | Num. Volo | Num. Posti | Partenza | Destinazione | Orario Partenza | Orario Arrivo | Prezzo Volo |");
                     System.out.println(
                             "----------------------------------------------------------------------------------------------------------------------");
-                    for (Voli volo : voli) { //Iteriamo su tutti gi oggetti Voli appartenenti all'ArrayList volo
-                        volo.stampaInfo(); //Stampiamo le info provenienti dagli oggetti Voli
+                    for (Voli volo : voli) { // Iteriamo su tutti gi oggetti Voli appartenenti all'ArrayList volo
+                        volo.stampaInfo(); // Stampiamo le info provenienti dagli oggetti Voli
                     }
                     break;
 
@@ -220,7 +222,7 @@ public class Main {
                     break;
                 case 4:
                     // Visualizza le prenotazioni per tutti i voli
-                    //Stamperà numero del volo e i passeggeri appartenenti a quel volo
+                    // Stamperà numero del volo e i passeggeri appartenenti a quel volo
                     for (Voli volo : voli) {
                         System.out.println("Numero volo: " + volo.getNumVolo());
                         volo.stampaPasseggeri();
