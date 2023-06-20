@@ -1,10 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Autenticazione {
     public ArrayList<String> username = new ArrayList<>();
     public ArrayList<String> password = new ArrayList<>();
-
+    public ArrayList<Voli> voli = new ArrayList<>();
     public String currentUser;
 
     public void registration() {
@@ -53,6 +54,124 @@ public class Autenticazione {
         } else {
             return 0;
         }
+    }
+
+    public void loginMaster(ArrayList<Voli> voli) {
+        // Verifica per il login
+        Scanner scanner = new Scanner(System.in);
+        boolean isValid = false;
+        System.out.println("Inserisci PIN segreto");
+        int pinVerify = scanner.nextInt();
+        // Vediamo se nello stesso indice di username e password avremmo le giuste
+        // credenziali
+
+        if (pinVerify == 1234) {
+            System.out.println("Accesso consentito");
+            menuMaster(voli);
+
+        } else {
+            System.out.println("Accesso negato!");
+            return;
+        }
+    }
+
+    public void menuMaster(ArrayList<Voli> voli) {
+        int scelta;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. Aggiungi un volo");
+        System.out.println("2. Elimina volo");
+        System.out.println("3. Elimina user");
+        System.out.println("4. Modifica username");
+        System.out.println("5. Visualizza lista utenti");
+        System.out.println("6. Menu autenticazione");
+        System.out.println("7. Esci");
+        scelta = scanner.nextInt();
+        switch (scelta) {
+
+            case 1:
+                aggiungiVolo(voli);
+                menuMaster(voli);
+                break;
+
+            case 2:
+                rimuovoVolo(voli);
+                menuMaster(voli);
+                break;
+
+            case 3:
+                deleteUser();
+                break;
+            case 4:
+
+                modifyUser();
+                break;
+            case 5:
+                readUser();
+                break;
+            case 6:
+                menuAutenticazione(voli);
+                break;
+            case 7:
+                System.out.println("Grazie per aver utilizzato la nostra app!");
+                System.exit(0);
+                return;
+            default:
+                System.out.println("Scelta non corretta");
+
+        }
+    }
+
+    public void aggiungiVolo(ArrayList<Voli> voli) {
+        Scanner scanner = new Scanner(System.in);
+        Scanner scannerInt = new Scanner(System.in);
+        Scanner scannerDouble = new Scanner(System.in);
+        System.out.println("Inserisci il nome della compagnia");
+        String nomeCompagnia = scanner.nextLine();
+        System.out.println("Inserisci il numero del volo");
+        int numVolo = scannerInt.nextInt();
+        for (Voli volo : voli) {
+            if (numVolo == volo.getNumVolo()) {
+                System.out.println("ID volo già esistente, impossibile aggiungere questo volo");
+                System.exit(0);
+            }
+        }
+        System.out.println("Inserisci il numero dei posti");
+        int numPosti = scannerInt.nextInt();
+        System.out.println("Inserisci il luogo di partenza");
+        String partenza = scanner.nextLine();
+        System.out.println("Inserisci il luogo di destinazione");
+        String destinazione = scanner.nextLine();
+        System.out.println("Inserisci orario di partenza");
+        String orarioPartenza = scanner.nextLine();
+        System.out.println("Inserisci orario di arrivo");
+        String orarioArrivo = scanner.nextLine();
+        ArrayList<String> nomePasseggeri = new ArrayList<>();
+        System.out.println("Inserisci il prezzo del volo");
+        double prezzoVolo = scannerDouble.nextDouble();
+        Voli nuovoVolo = new Voli(nomeCompagnia, numVolo, numPosti, partenza, destinazione, orarioPartenza,
+                orarioArrivo, nomePasseggeri, prezzoVolo);
+        voli.add(nuovoVolo);
+    }
+
+    public void rimuovoVolo(ArrayList<Voli> voli) {
+        Scanner scannerInt = new Scanner(System.in);
+        System.out.println("Inserisci il numero del volo");
+        int numVolo = scannerInt.nextInt();
+        Voli voloDaRimuovere = null;
+
+        for (Voli volo : voli) {
+            if (numVolo == volo.getNumVolo()) {
+                voloDaRimuovere = volo;
+                break;
+            }
+        }
+       if (voloDaRimuovere != null) {
+        voli.remove(voloDaRimuovere);
+        System.out.println("Volo eliminato correttamente");
+    } else {
+        System.out.println("Nessun volo trovato con il numero specificato");
+    }
+
     }
 
     public void deleteUser() {
@@ -136,16 +255,14 @@ public class Autenticazione {
         }
     }
 
-    public void menuAutenticazione() {
+    public void menuAutenticazione(ArrayList<Voli> voli) {
         int scelta;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Cosa vuoi fare?:");
         System.out.println("1. Registrazione");
         System.out.println("2. Login");
-        System.out.println("3. Elimina user");
-        System.out.println("4. Modifica username");
-        System.out.println("5. Visualizza lista utenti");
-        System.out.println("6. Uscire");
+        System.out.println("3. Login master");
+        System.out.println("4. Uscire");
         System.out.print("Seleziona un'opzione: ");
         scelta = scanner.nextInt();
         switch (scelta) {
@@ -158,43 +275,10 @@ public class Autenticazione {
                 verify();
                 break;
             case 3:
-                deleteUser();
-                System.out.println("Procedere alla registrazione o al login?");
-                System.out.println("1. Registrazione");
-                System.out.println("2. Login");
-                int sceltaLog = scanner.nextInt();
-                if (sceltaLog == 1) {
-                    registration();
-                } else if (sceltaLog == 2) {
-                    verify();
-                }
+                loginMaster(voli);
+
                 break;
             case 4:
-                modifyUser();
-                System.out.println("Procedere alla registrazione o al login?");
-                System.out.println("1. Registrazione");
-                System.out.println("2. Login");
-                sceltaLog = scanner.nextInt();
-                if (sceltaLog == 1) {
-                    registration();
-                } else if (sceltaLog == 2) {
-                    verify();
-                }
-                break;
-            case 5:
-                readUser();
-                System.out.println("Procedere alla registrazione o al login?");
-                System.out.println("1. Registrazione");
-                System.out.println("2. Login");
-                sceltaLog = scanner.nextInt();
-                if (sceltaLog == 1) {
-                    registration();
-                } else if (sceltaLog == 2) {
-                    verify();
-                }
-                break;
-
-            case 6:
                 System.out.println("Grazie per aver usato la nostra app!");
                 System.exit(0);
 

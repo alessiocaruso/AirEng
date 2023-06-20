@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import java.text.DecimalFormat;
-
 public class Main {
     public static void main(String[] args) {
         // Gli ArrayList nomePasseggeri memorizzano i nomi dei passeggeri per ogni volo
@@ -71,7 +69,8 @@ public class Main {
 
         System.out.println("Benvenuto!");
         Autenticazione auth = new Autenticazione();
-        auth.menuAutenticazione();
+        auth.menuAutenticazione(voli);
+
         int scelta = 0;
         do {
             // Menu
@@ -81,7 +80,8 @@ public class Main {
             System.out.println("3. Annulla prenotazione");
             System.out.println("4. Visualizza le prenotazioni");
             System.out.println("5. Cercare un volo");
-            System.out.println("6. Esci");
+            System.out.println("6. Menu autenticazione");
+            System.out.println("7. Esci");
             System.out.print("Seleziona un'opzione: ");
 
             scelta = scannerInt.nextInt(); // scelta del menù
@@ -254,13 +254,16 @@ public class Main {
                         break;
                     }
                     break;
-                case 6:
+                    case 6:
+                    auth.menuAutenticazione(voli);
+                    break;
+                case 7:
                     System.out.println("Grazie e arrivederci");
                     return;
                 default:
                     System.out.println("Non hai inserito una scelta giusta");
                     break;
             }
-        } while (scelta != 6);
+        } while (scelta != 7);
     }
 }

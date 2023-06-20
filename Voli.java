@@ -27,7 +27,10 @@ public class Voli {
         this.prezzoVolo = prezzoVolo;
     }
 
-    // Metodo per ottenere il nome della compagnia
+    public Voli() {
+	}
+
+	// Metodo per ottenere il nome della compagnia
     public String getNomeCompagnia() {
         return nomeCompagnia;
     }
